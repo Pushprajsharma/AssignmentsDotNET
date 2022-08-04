@@ -20,28 +20,60 @@ namespace PassengerService.Controllers
 
         [HttpGet]
 
-        public IEnumerable<Passenger> getAllPassengers()
+        public IActionResult getAllPassengers()
         {
-            return passengerList;
+            return Ok(passengerList);
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult getPassengerById(int id)
+        {
+            Passenger obj = passengerList.Find(item => item.passengerId == id);
+            if (obj != null)
+            {
+                return Ok(obj);
+
+            }
+            else {
+                return NotFound("No Passenger exist");
+
+            }
         }
 
         [HttpPost]
 
-        public List<Passenger> addPassenger(Passenger obj)
+        public IActionResult addPassenger(Passenger obj)
         {
             passengerList.Add(obj);
-            return passengerList;
+            return Ok(passengerList);
 
         }
 
         [HttpPut]
 
-        public List<Passenger> updatePassenger(Passenger obj)
+        public IActionResult updatePassenger(Passenger obj)
         {
             var objToDelete = passengerList.Find(item => item.passengerId == obj.passengerId);
             passengerList.Remove(objToDelete);
             passengerList.Add(obj);
-            return passengerList;
+            return Ok(passengerList);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+
+        public IActionResult deletePassenger(int id) 
+        {
+            Passenger obj = passengerList.Find(item => item.passengerId == id);
+            if (obj != null)
+            {
+                passengerList.Remove(obj);
+                return Ok(passengerList);
+            }
+            else 
+            {
+                return NotFound("NO PASSENGER EXIST");
+            }
         }
     }
 }

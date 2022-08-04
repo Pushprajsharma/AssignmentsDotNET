@@ -10,7 +10,20 @@
         }
       ],
       "UpStreamPathTemplate": "/apigateway/Passenger",
-      "UpStreamHttpMethod": [ "Get", "Put" ,"Post" ]
+      "UpStreamHttpMethod": [ "Get", "Put", "Post" ]
+
+    },
+    {
+      "DownStreamPathTemplate": "/api/Passenger/{id}",
+      "DownStreamSchema": "https",
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44384
+        }
+      ],
+      "UpStreamPathTemplate": "/apigateway/Passenger/{id}",
+      "UpStreamHttpMethod": [ "Get"]
 
     },
     {
@@ -23,7 +36,20 @@
         }
       ],
       "UpStreamPathTemplate": "/apigateway/Driver",
-      "UpStreamHttpMethod": [ "Get","Put","Post" ]
+      "UpStreamHttpMethod": [ "Get", "Put", "Post" ]
+
+    },
+    {
+      "DownStreamPathTemplate": "/api/Driver/{id}",
+      "DownStreamSchema": "https",
+      "DownStreamHostAndPorts": [
+        {
+          "Host": "localhost",
+          "Port": 44362
+        }
+      ],
+      "UpStreamPathTemplate": "/apigateway/Driver/{id}",
+      "UpStreamHttpMethod": [ "Get"]
 
     }
   ]

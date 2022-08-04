@@ -20,28 +20,61 @@ namespace DriverService.Controllers
 
         [HttpGet]
 
-        public IEnumerable<Driver> getAllDrivers()
+        public IActionResult getAllDrivers()
         {
-            return driverList;
+            return Ok(driverList);
+        }
+        [HttpGet]
+        [Route("{id}")]
+        public IActionResult getDriverById(int id)
+        {
+            Driver obj = driverList.Find(item => item.driverId == id);
+            if (obj != null)
+            {
+                return Ok(obj);
+
+            }
+            else
+            {
+                return NotFound("No driver exist");
+
+            }
         }
 
         [HttpPost]
 
-        public List<Driver> addDriver(Driver obj)
+        public IActionResult addDriver( Driver obj)
         {
             driverList.Add(obj);
-            return driverList;
+            return Ok(driverList);
 
         }
 
         [HttpPut]
 
-        public List<Driver> updateDriver(Driver obj)
+        public IActionResult updatePassenger(Driver obj)
         {
             var objToDelete = driverList.Find(item => item.driverId == obj.driverId);
             driverList.Remove(objToDelete);
             driverList.Add(obj);
-            return driverList;
+            return Ok(driverList);
+        }
+
+        [HttpDelete]
+        [Route("{id}")]
+
+        public IActionResult deletePassenger(int id)
+        {
+            Driver obj = driverList.Find(item => item.driverId == id);
+            if (obj != null)
+            {
+                driverList.Remove(obj);
+                return Ok(driverList);
+            }
+            else
+            {
+                return NotFound("NO ]Driver EXIST");
+            }
         }
     }
 }
